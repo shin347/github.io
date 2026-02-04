@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Task Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .task-item {
+            transition: all 0.2s ease;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .dark .bg-card {
+            background-color: #2d3748;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+
+    <!-- ナビゲーション -->
+    <nav class="p-6 flex justify-between items-center max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold tracking-tight">
+            <i class="fas fa-check-circle text-indigo-600 mr-2"></i>TaskPlanner
+        </h1>
+        <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:inline"></i>
+        </button>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="max-w-xl mx-auto p-6">
+        
+        <!-- 入力エリア -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm mb-8 bg-card border border-gray-100 dark:border-gray-700">
+            <div class="flex gap-2">
+                <input type="text" id="taskInput" placeholder="新しいタスクを入力..." 
+                    class="flex-1 bg-gray-50 dark:bg-gray-700 border-none rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                <button id="addBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all active:scale-95">
+                    追加
+                </button>
+            </div>
+        </div>
+
+        <!-- タスクリスト -->
+        <div class="space-y-3" id="taskList">
+            <!-- デフォルトのタスク -->
+            <div class="task-item bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between border border-gray-100 dark:border-gray-700 bg-card">
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                    <span>Webサイトのテストを完了する</span>
+                </div>
+                <button class="text-gray-400 hover:text-red-500 transition-colors delete-btn">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ステータス -->
+        <div class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            <p id="stats">タスクはまだありません</p>
+        </div>
+
+        <!-- ダミー画像セクション -->
+        <div class="mt-12 text-center opacity-70">
+            <div class="w-full h-40 bg-gray-200 dark:bg-gray-700 rounded-2xl flex items-center justify-center italic">
